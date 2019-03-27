@@ -1,6 +1,6 @@
 <?php
 
-namespace Xandrucea\ItemListDisplay;
+namespace Xandrucea;
 
 use Xandrucea\ItemListDisplay\Application\ItemListDisplay as ItemListDisplayPort;
 

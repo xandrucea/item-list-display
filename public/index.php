@@ -14,10 +14,11 @@ if (file_exists($autoloader)) {
     </head>
     <body>
         <?php
-        $blog = new \Xandrucea\ItemListDisplay\ItemListDisplay([
+        $blog = new \Xandrucea\ItemListDisplay([
             'contentDirectory'  => 'content/',
             'templateDirectory' => 'templates/',
-            'itemKey'           => 'entry'
+            'itemKey'           => 'entry',
+            'sortOrder'         => 'ascending'
         ]);
 
         $blog->render();

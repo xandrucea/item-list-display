@@ -12,6 +12,8 @@ class ItemListDisplay
 
     protected static $fileFormat = 'html';
 
+    protected static $sortOrder = 'ascending';
+
     public function __construct(array $config = [])
     {
 
@@ -30,17 +32,26 @@ class ItemListDisplay
         if (!empty($config['fileFormat'])) {
             self::$fileFormat = $config['fileFormat'];
         }
+
+        if (!empty($config['sortOrder'])) {
+            self::$sortOrder = $config['sortOrder'];
+        }
     }
 
     public function render()
     {
         $entryId = $_GET[self::$itemKey] ?? false;
 
-        $sortOrder = $_GET['sort'] ?? 'ascending';
         $sortOptions = [
             'ascending' => SCANDIR_SORT_ASCENDING,
             'descending' => SCANDIR_SORT_DESCENDING
         ];
+
+        $sortOrder = self::$sortOrder;
+
+        if (isset($_GET['sort']) && in_array($_GET['sort'], array_keys($sortOptions))){
+            $sortOrder = $_GET['sort'];
+        }
 
         if (empty($entryId)) {
             $storage = array_values(preg_grep('/^([^.])/', scandir(self::$contentDirectory, $sortOptions[$sortOrder])));
