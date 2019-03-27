@@ -9,6 +9,9 @@
             "email": "info@alex-cio.de"
         }
     ],
+    "scripts": {
+        "start": "php -S localhost:3000 -t public/"
+    },
     "autoload": {
         "psr-4": {
             "Xandrucea\\": "src/"

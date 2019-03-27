@@ -22,6 +22,15 @@ Render the content.
 $content->render();
 ```
 
+## Get started
+```
+git clone https://github.com/xandrucea/item-list-display.git
+
+composer install
+
+composer run start
+```
+
 ## Contributing
 WIP
 
