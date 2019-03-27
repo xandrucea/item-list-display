@@ -1,0 +1,18 @@
+{
+    "name": "xandrucea/item-list-display",
+    "description": "An abstract PHP script to display stuff on your website.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Cio",
+            "email": "info@alex-cio.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Xandrucea\\": "src/"
+        }
+    },
+    "require": {}
+}
