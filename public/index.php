@@ -17,7 +17,7 @@ if (file_exists($autoloader)) {
         $blog = new \Xandrucea\ItemListDisplay\ItemListDisplay([
             'contentDirectory'  => 'content/',
             'templateDirectory' => 'templates/',
-            'itemKey'           => 'blog'
+            'itemKey'           => 'entry'
         ]);
 
         $blog->render();

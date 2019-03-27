@@ -36,11 +36,25 @@ class ItemListDisplay
     {
         $entryId = $_GET[self::$itemKey] ?? false;
 
+        $sortOrder = $_GET['sort'] ?? 'ascending';
+        $sortOptions = [
+            'ascending' => SCANDIR_SORT_ASCENDING,
+            'descending' => SCANDIR_SORT_DESCENDING
+        ];
+
         if (empty($entryId)) {
-            $storage = array_values(preg_grep('/^([^.])/', scandir(self::$contentDirectory, SCANDIR_SORT_ASCENDING)));
+            $storage = array_values(preg_grep('/^([^.])/', scandir(self::$contentDirectory, $sortOptions[$sortOrder])));
+
+            $index = 0;
             foreach ($storage as $filename) {
+                ++$index;
+
                 $link = preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename);
                 echo '<a href="?'.self::$itemKey.'='.$link.'">'.$link.'</a>';
+
+                if ($index < count($storage)){
+                    echo '<br>';
+                }
             }
         } else {
             $entryFile = self::$contentDirectory.$entryId.'.'.self::$fileFormat;
