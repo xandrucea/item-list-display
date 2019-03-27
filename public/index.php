@@ -18,7 +18,7 @@ if (file_exists($autoloader)) {
             'contentDirectory'  => 'content/',
             'templateDirectory' => 'templates/',
             'itemKey'           => 'entry',
-            'sortOrder'         => 'ascending'
+            'sortOrder'         => 'descending'
         ]);
 
         $blog->render();

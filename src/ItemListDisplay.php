@@ -13,10 +13,6 @@ class ItemListDisplay extends ItemListDisplayPort
 
     public function showConfig()
     {
-        echo '<pre>';
-        echo '$contentDirectory : ', self::$contentDirectory . '<br>';
-        echo '$templateDirectory : ', self::$templateDirectory . '<br>';
-        echo '$itemKey : ', self::$itemKey . '<br>';
-        echo '</pre>';
+        echo parent::showConfig();
     }
 }

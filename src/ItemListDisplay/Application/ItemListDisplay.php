@@ -2,80 +2,58 @@
 
 namespace Xandrucea\ItemListDisplay\Application;
 
+use Xandrucea\ItemListDisplay\Infrastructure\Configuration;
+
 class ItemListDisplay
 {
-    protected static $contentDirectory = 'content/';
-
-    protected static $templateDirectory = 'templates/';
-
-    protected static $itemKey = 'entry';
-
-    protected static $fileFormat = 'html';
-
-    protected static $sortOrder = 'ascending';
+    protected static $config;
 
     public function __construct(array $config = [])
     {
-
-        if (!empty($config['contentDirectory'])) {
-            self::$contentDirectory = $config['contentDirectory'];
-        }
-
-        if (!empty($config['templateDirectory'])) {
-            self::$templateDirectory = $config['templateDirectory'];
-        }
-
-        if (!empty($config['itemKey'])) {
-            self::$itemKey = $config['itemKey'];
-        }
-
-        if (!empty($config['fileFormat'])) {
-            self::$fileFormat = $config['fileFormat'];
-        }
-
-        if (!empty($config['sortOrder'])) {
-            self::$sortOrder = $config['sortOrder'];
-        }
+        self::$config = new Configuration($config);
     }
 
     public function render()
     {
-        $entryId = $_GET[self::$itemKey] ?? false;
-
-        $sortOptions = [
-            'ascending' => SCANDIR_SORT_ASCENDING,
-            'descending' => SCANDIR_SORT_DESCENDING
-        ];
-
-        $sortOrder = self::$sortOrder;
-
-        if (isset($_GET['sort']) && in_array($_GET['sort'], array_keys($sortOptions))){
-            $sortOrder = $_GET['sort'];
-        }
+        $entryId           = $_GET[self::$config->getItemKey()] ?? false;
+        $contentDirectory  = self::$config->getContentDirectory();
+        $templateDirectory = self::$config->getTemplateDirectory();
+        $fileFormat        = self::$config->getFileFormat();
+        $sortOrder         = self::$config->getSortOrder();
+        $itemKey           = self::$config->getItemKey();
 
         if (empty($entryId)) {
-            $storage = array_values(preg_grep('/^([^.])/', scandir(self::$contentDirectory, $sortOptions[$sortOrder])));
+            $storage = array_values(preg_grep('/^([^.])/', scandir($contentDirectory, $sortOrder)));
 
             $index = 0;
             foreach ($storage as $filename) {
                 ++$index;
 
                 $link = preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename);
-                echo '<a href="?'.self::$itemKey.'='.$link.'">'.$link.'</a>';
+                echo '<a href="?'.$itemKey.'='.$link.'">'.$link.'</a>';
 
-                if ($index < count($storage)){
+                if ($index < count($storage)) {
                     echo '<br>';
                 }
             }
         } else {
-            $entryFile = self::$contentDirectory.$entryId.'.'.self::$fileFormat;
+            $entryFile = $contentDirectory.$entryId.'.'.$fileFormat;
 
             if (file_exists($entryFile)) {
                 require $entryFile;
 
             } else {
-                echo 'Computer says \'No\'!';
+                require $templateDirectory.'error-page.html';
             }
         }
+    }
+
+    public function showConfig()
+    {
+        echo '<pre>';
+        echo '$contentDirectory : ', self::$config->getContentDirectory().'<br>';
+        echo '$templateDirectory : ', self::$config->getTemplateDirectory().'<br>';
+        echo '$itemKey : ', self::$config->getItemKey().'<br>';
+        echo '</pre>';
     }
 }
