@@ -25,17 +25,28 @@ class Template
         return self::$templateDirectory.'error-page.html';
     }
 
-    public static function item()
+    public static function item($props)
     {
         $filename = self::$templateDirectory.'item.html';
 
         try {
-            $templateContents = file_get_contents($filename);
+            $templateContents = self::process(file_get_contents($filename), $props);
 
         } catch (\RuntimeException $exception) {
             throw new \Exception($exception->getMessage(), $exception->getCode());
         }
 
         return $templateContents;
+    }
+
+    protected static function process(string $templateString, array $props)
+    {
+        $templateInput = $templateString;
+
+        foreach (array_keys($props) as $prop) {
+            $templateInput = str_replace('{'.$prop.'}', $props[$prop], $templateInput);
+        }
+
+        return $templateInput;
     }
 }
