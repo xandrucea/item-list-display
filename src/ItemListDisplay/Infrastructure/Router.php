@@ -66,23 +66,13 @@ class Router
                 if ($route === $this->itemKey) {
                     $controller->run(array_splice($route, 1));
                 } else {
-                    echo 'defult';
+                    $controller->run();
                 }
             }
-
-
-            echo '<br>';
-            print_r($controller);
-
         } else {
             echo 'Bad route';
         }
-//        print_r($controllerName);
-//        $template   = new Template();
-//        $controller = new Controller($route);
-//
-//        $controller->run($template, $props);
-
+        print_r($controller);
     }
 
     public function configureRouter($config)
