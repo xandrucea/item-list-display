@@ -8,7 +8,17 @@ class Controller
 {
     protected $method = '';
     protected $params = [];
-    protected $template = '';
+
+    /**
+     * @var Template;
+     */
+    protected $template;
+
+    public function __construct()
+    {
+        $this->template = new Template();
+
+    }
 
     /**
      * @return string
@@ -43,17 +53,17 @@ class Controller
     }
 
     /**
-     * @return string
+     * @return Template
      */
-    public function getTemplate(): string
+    public function getTemplate(): Template
     {
         return $this->template;
     }
 
     /**
-     * @param string $template
+     * @param Template $template
      */
-    public function setTemplate(string $template): void
+    public function setTemplate(Template $template): void
     {
         $this->template = $template;
     }

@@ -2,7 +2,7 @@
 
 namespace Xandrucea\ItemListDisplay\Application;
 
-use Xandrucea\ItemListDisplay\Infrastructure\Configuration;
+use Xandrucea\ItemListDisplay\Infrastructure\Configuration\Configuration;
 use Xandrucea\ItemListDisplay\Infrastructure\Router;
 use Xandrucea\ItemListDisplay\Infrastructure\Template;
 

@@ -53,9 +53,8 @@ class Router
 
             if ($routesCount > 1) {
                 if ($route[0] === $this->itemKey) {
-                    $controller->run(array_splice($route, 1));
+                    $controller->run(array_splice($route, 1), []);
                 } else {
-                    echo 'more';
                     $method = $route[1];
                     if (method_exists($controller, $method)) {
                         $controller->$method(array_splice($route, 2));
@@ -64,7 +63,7 @@ class Router
 
             } else {
                 if ($route === $this->itemKey) {
-                    $controller->run(array_splice($route, 1));
+                    $controller->run(array_splice($route, 1), []);
                 } else {
                     $controller->run();
                 }
@@ -72,7 +71,6 @@ class Router
         } else {
             echo 'Bad route';
         }
-        print_r($controller);
     }
 
     public function configureRouter($config)

@@ -8,13 +8,10 @@ use Xandrucea\ItemListDisplay\Infrastructure\Controller;
 
 class DisplayController extends Controller
 {
-    public function __construct()
+    public function run($content, $data)
     {
         $this->setMethod('display');
-    }
 
-    public function run($content)
-    {
         $this->setParams($content);
 
         $contentDirectory = 'content/';

@@ -1,6 +1,6 @@
 <?php
 
-namespace Xandrucea\ItemListDisplay\Infrastructure;
+namespace Xandrucea\ItemListDisplay\Infrastructure\Configuration;
 
 class Configuration
 {
