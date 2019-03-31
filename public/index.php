@@ -21,8 +21,16 @@ if (file_exists($autoloader)) {
             'sortOrder'         => 'descending'
         ]);
 
+        $blog->configureRouter([
+            'list'    => 'item.html',
+            'display' => 'display.html',
+            'error'   => 'error-page.html',
+        ]);
+
+        echo '<pre>';
         $blog->render();
-//        $blog->showConfig();
+        echo '</pre>';
+        //        $blog->showConfig();
         ?>
     </body>
 </html>

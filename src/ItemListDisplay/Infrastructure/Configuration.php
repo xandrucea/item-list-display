@@ -5,6 +5,13 @@ namespace Xandrucea\ItemListDisplay\Infrastructure;
 class Configuration
 {
     /**
+     * Base directory path
+     *
+     * @var string
+     */
+    protected static $baseDir = '';
+
+    /**
      * Content directory path
      *
      * @var string
@@ -41,6 +48,10 @@ class Configuration
 
     public function __construct(array $config)
     {
+        if (!empty($config['baseDir'])) {
+            $this->setBaseDir($config['baseDir']);
+        }
+
         if (!empty($config['contentDirectory'])) {
             $this->setContentDirectory($config['contentDirectory']);
         }
@@ -60,6 +71,23 @@ class Configuration
         if (!empty($config['sortOrder'])) {
             $this->setSortOrder($config['sortOrder']);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public static function getBaseDir(): string
+    {
+        return self::$baseDir;
+    }
+
+    /**
+     * @param string $baseDir
+     */
+    public static function setBaseDir(string $baseDir): void
+    {
+        // TODO: Implement base directory offset for route
+        self::$baseDir = $baseDir;
     }
 
     /**
