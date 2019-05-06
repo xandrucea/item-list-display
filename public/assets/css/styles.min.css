@@ -1,0 +1,17 @@
+.container {
+    border: thin solid red;
+    display: flex;
+}
+
+.row {
+    border: thin solid green;
+
+    display:
+}
+
+.col {
+    border: thin solid gold;
+    
+    display: inline;
+    flex-flow: row;
+}

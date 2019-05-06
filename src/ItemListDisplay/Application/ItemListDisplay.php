@@ -23,7 +23,6 @@ class ItemListDisplay
 
     public function render()
     {
-//        $routes = substr(rtrim($_SERVER['REQUEST_URI'], '/\\'));
         $routes = explode('/', $_SERVER['REQUEST_URI']);
 
         foreach ($routes as $route) {
@@ -35,44 +34,6 @@ class ItemListDisplay
         $routes = array_merge($routes);
 
         self::$router->setRoute($routes, self::$templates);
-        /*
-        $entryId          = $_GET[self::$config::getItemKey()] ?? false;
-        $contentDirectory = self::$config::getContentDirectory();
-        $fileFormat       = self::$config::getFileFormat();
-        $sortOrder        = self::$config::getSortOrder();
-        $itemKey          = self::$config::getItemKey();
-
-        if (empty($entryId)) {
-            $storage = array_values(preg_grep('/^([^.])/', scandir($contentDirectory, $sortOrder)));
-
-            $index = 0;
-            echo '<ul>';
-            foreach ($storage as $filename) {
-                ++$index;
-
-                $link = preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename);
-//                echo '<a href="?'.$itemKey.'='.$link.'">'.$link.'</a>';
-                echo self::$templates::item([
-                    '$itemKey' => $itemKey,
-                    '$link'    => $link
-                ]);
-
-                if ($index < count($storage)) {
-                    echo '<br>';
-                }
-            }
-            echo '</ul>';
-        } else {
-            $entryFile = $contentDirectory.$entryId.'.'.$fileFormat;
-
-            if (file_exists($entryFile)) {
-                require $entryFile;
-
-            } else {
-                require self::$templates::errorPage();
-            }
-        }
-        */
     }
 
     public function configureRouter(array $config): void
