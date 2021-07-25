@@ -4,6 +4,8 @@ $autoloader = dirname(__DIR__, 1).'/vendor/autoload.php';
 if (file_exists($autoloader)) {
     require $autoloader;
 }
+
+use Xandrucea\ItemListDisplay;
 ?>
 
 <!DOCTYPE html>
@@ -15,31 +17,33 @@ if (file_exists($autoloader)) {
     </head>
     <body>
         <?php
-        $blog = new \Xandrucea\ItemListDisplay([
+        $content = new ItemListDisplay([
             'contentDirectory'  => 'content/',
             'templateDirectory' => 'templates/',
             'itemKey'           => 'entry',
-            'sortOrder'         => 'descending'
+            'fileFormat'        => 'html',
+            'sortOrder'         => 'descending',
+            'baseDir'           => '',
         ]);
-
-        $blog->configureRouter([
-            'list'    => 'item.html',
-            'display' => 'display.html',
-            'error'   => 'error-page.html',
-        ]);
-
-        echo '<pre>';
-        $blog->render();
-        echo '</pre>';
-        //        $blog->showConfig();
         ?>
         <div class="container">
             <div class="row">Header</div>
             <div class="row">
-                <div class="col">Menymenu</div>
-                <div class="col">Content</div>
+                <div class="col">
+                    <?php
+                    // require_once('./assets/php/navigation.php')
+                    ?>
+                </div>
+                <div class="col">
+                    <pre><?= json_encode($content->showContent(), JSON_PRETTY_PRINT); ?></pre>
+                    <?= $content->render(); ?>
+                </div>
             </div>
-            <div class="row">Footer</div>
+            <div class="row">
+                <div class="col">
+                    Footer
+                </div>
+            </div>
         </div>
     </body>
 </html>

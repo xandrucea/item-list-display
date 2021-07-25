@@ -1,17 +1,22 @@
 .container {
-    border: thin solid red;
-    display: flex;
+  border: thin solid red;
+  display: flex;
+  flex-direction: column;
 }
 
 .row {
-    border: thin solid green;
+  border: thin solid green;
 
-    display:
+  display: ;
 }
 
 .col {
-    border: thin solid gold;
-    
-    display: inline;
-    flex-flow: row;
+  border: thin solid gold;
+
+  display: inline;
+  flex-flow: row;
+}
+
+a {
+  text-transform: capitalize;
 }

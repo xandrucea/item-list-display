@@ -17,5 +17,7 @@
             "Xandrucea\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+      "ext-json": "*"
+    }
 }

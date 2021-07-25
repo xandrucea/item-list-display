@@ -1,6 +1,6 @@
 <?php
 
-namespace Xandrucea\ItemListDisplay\Infrastructure\Configuration;
+namespace Xandrucea\ItemListDisplay\Application;
 
 class Configuration
 {
@@ -9,35 +9,35 @@ class Configuration
      *
      * @var string
      */
-    protected static $baseDir = '';
+    private static $baseDir = '';
 
     /**
      * Content directory path
      *
      * @var string
      */
-    protected static $contentDirectory = 'content/';
+    private static $contentDirectory = 'content/';
 
     /**
      * Template directory path
      *
      * @var string
      */
-    protected static $templateDirectory = 'templates/';
+    private static $templateDirectory = 'templates/';
 
     /**
      * Item key
      *
      * @var string
      */
-    protected static $itemKey = 'entry';
+    private static $itemKey = 'entry';
 
     /**
      * File format
      *
      * @var string
      */
-    protected static $fileFormat = 'html';
+    private static $fileFormat = 'html';
 
     /**
      * Sort order
@@ -71,6 +71,8 @@ class Configuration
         if (!empty($config['sortOrder'])) {
             $this->setSortOrder($config['sortOrder']);
         }
+
+        return $this;
     }
 
     /**
@@ -164,7 +166,7 @@ class Configuration
         }
 
         $sortOptions = [
-            'ascending'  => SCANDIR_SORT_ASCENDING,
+            'ascending' => SCANDIR_SORT_ASCENDING,
             'descending' => SCANDIR_SORT_DESCENDING
         ];
 

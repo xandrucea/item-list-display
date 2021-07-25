@@ -6,12 +6,22 @@ namespace Xandrucea\ItemListDisplay\Infrastructure;
 
 class Template
 {
-    public function process(string $templateString, array $props)
+    private static $templatePath;
+
+    private static $templateFile = 'item.html';
+
+    public function __construct($templateDirectory)
     {
-        $templateInput = $templateString;
+        self::$templatePath = $templateDirectory;
+    }
+
+    public function process(array $props)
+    {
+        $templateInput = file_get_contents(self::$templatePath.DIRECTORY_SEPARATOR.self::$templateFile);
 
         foreach (array_keys($props) as $prop) {
-            $templateInput = str_replace('{'.$prop.'}', $props[$prop], $templateInput);
+            echo json_encode($prop);
+            $templateInput = str_replace('{$'.$prop.'}', $props[$prop], $templateInput);
         }
 
         return $templateInput;
